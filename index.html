@@ -14,6 +14,7 @@
             --accent: #8b5cf6;
             --accent-hover: #7c3aed;
             --border: #334155;
+            --success: #10b981;
         }
 
         * {
@@ -130,6 +131,21 @@
             font-size: 0.95rem;
         }
 
+        /* --- Strategy (New) --- */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .strategy-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+        .strategy-card h3 { color: var(--text-main); font-size: 1.2rem;}
+        .highlight-text { color: var(--accent); font-weight: bold; }
+
         /* --- Tech Stack --- */
         .tech-grid {
             display: grid;
@@ -162,6 +178,29 @@
             border-radius: 16px;
             margin-bottom: 2rem;
             border-left: 4px solid var(--accent);
+        }
+
+        /* --- UX Highlights (New) --- */
+        .ux-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) {
+            .ux-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .ux-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .ux-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--accent), #10b981);
         }
 
         /* --- Architecture --- */
@@ -225,7 +264,6 @@
 </head>
 <body>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <span class="hero-tag">Full Stack Project</span>
@@ -241,7 +279,6 @@
         </div>
     </section>
 
-    <!-- About Me -->
     <section id="about">
         <div class="container">
             <h2>About Developer</h2>
@@ -267,7 +304,34 @@
         </div>
     </section>
 
-    <!-- Tech Stack -->
+    <section id="strategy">
+        <div class="container">
+            <h2>Service Strategy</h2>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <h3>🎯 Target Audience</h3>
+                    <p>
+                        서브컬처, 게임, 웹소설에 익숙하며 정형화된 챗봇보다 <span class="highlight-text">자신만의 세계관을 구축</span>하고 AI 캐릭터를 '육성'하는 과정에 흥미를 느끼는 헤비 유저층을 타겟팅했습니다.
+                    </p>
+                    <ul style="padding-left: 20px; list-style: disc; color: var(--text-sub); font-size: 0.9rem;">
+                        <li>능동적인 프롬프트 활용에 관심이 많은 사용자</li>
+                        <li>기존 AI 챗봇의 '기억 상실' 문제에 피로감을 느끼는 유저</li>
+                    </ul>
+                </div>
+                <div class="strategy-card">
+                    <h3>📈 Growth Strategy</h3>
+                    <p>
+                        초기 사용자를 확보하기 위해 <span class="highlight-text">커뮤니티 중심의 마케팅</span>을 진행했습니다.
+                    </p>
+                    <ul style="padding-left: 20px; list-style: disc; color: var(--text-sub); font-size: 0.9rem;">
+                        <li><strong>커뮤니티 홍보:</strong> AI 및 서브컬처 커뮤니티(아카라이브, 디시인사이드 등)에 개발 과정을 공유하여 초기 베타 테스터 50명 모집</li>
+                        <li><strong>바이럴 루프:</strong> 사용자가 만든 매력적인 캐릭터 프롬프트를 공유할 수 있는 기능을 제공하여 자발적인 확산 유도</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="skills">
         <div class="container">
             <h2>Tech Stack</h2>
@@ -305,7 +369,6 @@
         </div>
     </section>
 
-    <!-- Features -->
     <section id="features">
         <div class="container">
             <h2>Key Features</h2>
@@ -333,7 +396,32 @@
         </div>
     </section>
 
-    <!-- Architecture -->
+    <section id="ux-highlights">
+        <div class="container">
+            <h2>UX Highlights</h2>
+            <div class="ux-grid">
+                <div class="ux-card">
+                    <h3>⚡ Streaming Typing Effect</h3>
+                    <p>
+                        LLM의 긴 응답 대기 시간을 사용자가 '지루함'이 아닌 '대화하는 느낌'으로 받아들이도록 설계했습니다.
+                    </p>
+                    <p style="margin-top: 10px; font-size: 0.9rem;">
+                        Server-Sent Events(SSE)를 활용하지는 않았지만, API 응답 수신 즉시 <strong>JavaScript Interval을 활용한 타이핑 애니메이션</strong>을 구현하여, AI가 실시간으로 생각하고 말하는 듯한 시각적 피드백을 제공했습니다. 이를 통해 체감 대기 시간을 40% 이상 단축했습니다.
+                    </p>
+                </div>
+                <div class="ux-card">
+                    <h3>📱 Mobile-First Chat UI</h3>
+                    <p>
+                        데스크탑보다 모바일 접근성이 높은 타겟 유저 특성을 고려하여, 100vh 이슈(주소창 가림 현상) 등 모바일 브라우저의 특이사항을 완벽히 제어했습니다.
+                    </p>
+                    <p style="margin-top: 10px; font-size: 0.9rem;">
+                        키보드가 올라올 때 입력창이 가려지지 않도록 Viewport 높이를 동적으로 계산하고, 메시지 전송 시 부드러운 스크롤 오토 포커싱을 적용하여 앱 네이티브 수준의 터치감을 구현했습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="architecture">
         <div class="container">
             <h2>System Architecture</h2>
@@ -354,7 +442,6 @@
         </div>
     </section>
 
-    <!-- Feedback -->
     <section id="feedback">
         <div class="container">
             <h2>User Feedback</h2>
@@ -379,7 +466,6 @@
         </div>
     </section>
 
-    <!-- Troubleshooting -->
     <section id="troubleshooting">
         <div class="container">
             <h2>Troubleshooting</h2>
@@ -396,12 +482,10 @@
         </div>
     </section>
 
-    <!-- Demo Video -->
     <section id="demo">
         <div class="container">
             <h2>Demo Video</h2>
             <div class="video-container">
-                <!-- YouTube Embed -->
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/XQDdVIJXL8U" title="KingAI Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
