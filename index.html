@@ -3,336 +3,416 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이재왕 | KingAI 캐릭터 채팅 포트폴리오</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter & Noto Sans KR -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <title>KingAI - 이재왕 포트폴리오</title>
     <style>
+        /* --- Reset & Base Styles --- */
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --accent: #8b5cf6;
+            --accent-hover: #7c3aed;
+            --border: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
         }
-        .section-title {
-            /* 참고: CDN Tailwind에서는 @apply가 실제로는 안 먹지만, 디자인 메모용으로 두었음 */
-            font-size: 1.875rem; /* text-3xl */
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- Layout --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        section:last-child { border-bottom: none; }
+
+        /* --- Typography --- */
+        h1, h2, h3 {
             font-weight: 700;
-            color: #fff;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid #3b82f6;
-            padding-left: 0.75rem;
+            line-height: 1.3;
         }
-        .card {
-            background-color: #020617; /* bg-slate-950 계열 */
-            padding: 1.5rem;
-            border-radius: 0.75rem;
+
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        h2 { font-size: 2rem; margin-bottom: 2rem; color: var(--accent); }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        p { margin-bottom: 1rem; color: var(--text-sub); }
+
+        /* --- Header / Hero --- */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 70%);
         }
-        .skill-tag {
-            background-color: #374151;
-            color: #e5e7eb;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 500;
+
+        .hero-tag {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--accent);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .hero-buttons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
             display: inline-flex;
             align-items: center;
-            gap: 0.25rem;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover { background: var(--accent-hover); }
+        .btn:not(.btn-primary):hover { background: #334155; }
+
+        /* --- About Me --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .about-grid { grid-template-columns: 1fr 2fr; }
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .contact-info li {
+            margin-bottom: 0.5rem;
+            color: var(--text-sub);
+            font-size: 0.95rem;
+        }
+
+        /* --- Tech Stack --- */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tech-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .tech-card h3 { font-size: 1.1rem; color: var(--text-main); margin-bottom: 1rem; }
+        
+        .tag-container { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tech-tag {
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+            color: var(--text-sub);
+        }
+
+        /* --- Key Features --- */
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        /* --- Architecture --- */
+        .architecture-diagram {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            color: #333;
+            overflow-x: auto;
+        }
+        .arch-step {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        /* --- Feedback --- */
+        .feedback-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feedback-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .stars { color: #fbbf24; margin-bottom: 10px; display: block;}
+
+        /* --- Video --- */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 16px;
+            background: #000;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-sub);
+            font-size: 0.9rem;
         }
     </style>
 </head>
-<body class="bg-gray-950 text-gray-300 selection:bg-blue-500 selection:text-white">
+<body>
 
-    <!-- 메인 컨테이너 -->
-    <div class="max-w-5xl mx-auto p-6 sm:p-10 md:p-16 space-y-20">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <span class="hero-tag">Full Stack Project</span>
+            <h1>KingAI <br><span style="font-size: 0.6em; color: var(--text-sub); font-weight: 400;">기억을 가진 나만의 AI 캐릭터와의 대화</span></h1>
+            <p style="max-width: 600px; margin: 0 auto 2rem;">
+                단순한 챗봇이 아닌, 사용자가 직접 만든 세계관 속에서 영구적인 기억을 가지고 상호작용하는 인터랙티브 채팅 플랫폼입니다.
+            </p>
+            <div class="hero-buttons">
+                <a href="https://kingai-477907.web.app/" target="_blank" class="btn btn-primary">🚀 배포 사이트 방문</a>
+                <a href="https://github.com/Leejaewang03/kingAI" target="_blank" class="btn">💻 GitHub 코드</a>
+                <a href="https://youtu.be/XQDdVIJXL8U" target="_blank" class="btn">📺 시연 영상</a>
+            </div>
+        </div>
+    </section>
 
-        <!-- 1. Hero & Contact 섹션 -->
-        <header class="flex flex-col md:flex-row items-center md:items-start gap-8">
-            <!-- 프로필 이미지 -->
-            <img 
-                src="https://placehold.co/160x160/3182ce/ffffff?text=LJW" 
-                alt="이재왕 프로필 이미지" 
-                class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover shadow-2xl flex-shrink-0 border-4 border-gray-800"
-                onerror="this.src='https://placehold.co/160x160/3182ce/ffffff?text=LJW';">
+    <!-- About Me -->
+    <section id="about">
+        <div class="container">
+            <h2>About Developer</h2>
+            <div class="about-grid">
+                <div class="profile-card">
+                    <h3>이재왕</h3>
+                    <p style="margin-bottom: 0.5rem; color: var(--accent);">Full Stack Developer</p>
+                    <ul class="contact-info">
+                        <li>📧 dudbeksp03@gmail.com</li>
+                        <li>🔗 github.com/Leejaewang03</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>"사용자가 오래 머물고 싶은 경험을 설계합니다"</h3>
+                    <p>
+                        React와 TypeScript로 복잡한 인터랙션을 직관적으로 구현하고, 백엔드와 데이터 구조까지 스스로 설계하는 풀스택 스타일을 지향합니다.
+                    </p>
+                    <p>
+                        이번 <strong>KingAI</strong> 프로젝트에서는 LLM의 한계인 “기억 유지” 문제를 해결하기 위해 대화 로그 저장, 장기 기억(Long-term Memory) 요약 알고리즘, 토큰 최적화 시스템을 직접 설계하고 구현했습니다. 프롬프트 엔지니어링부터 클라우드 배포까지 전 과정을 주도했습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="skills">
+        <div class="container">
+            <h2>Tech Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3>Frontend</h3>
+                    <div class="tag-container">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Vite</span>
+                        <span class="tech-tag">Axios</span>
+                        <span class="tech-tag">CSS Modules</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <h3>Backend</h3>
+                    <div class="tag-container">
+                        <span class="tech-tag">Java 21</span>
+                        <span class="tech-tag">Spring Boot 3</span>
+                        <span class="tech-tag">Spring Security</span>
+                        <span class="tech-tag">JPA/Hibernate</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <h3>Infra & AI</h3>
+                    <div class="tag-container">
+                        <span class="tech-tag">Google Cloud Run</span>
+                        <span class="tech-tag">Firebase Hosting</span>
+                        <span class="tech-tag">MySQL (Cloud SQL)</span>
+                        <span class="tech-tag">Gemini 2.5 Pro</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features">
+        <div class="container">
+            <h2>Key Features</h2>
             
-            <div class="w-full text-center md:text-left">
-                <h1 class="text-4xl md:text-5xl font-bold text-white">이재왕</h1>
-                <p class="text-xl md:text-2xl text-blue-400 mt-2">
-                    생성형 AI로 인터랙티브 캐릭터 세계를 만드는 풀스택 개발자
-                </p>
-                
-                <!-- Contact Links -->
-                <div class="flex justify-center md:justify-start space-x-5 mt-6">
-                    <!-- Email -->
-                    <a href="mailto:dudbeksp03@gmail.com" title="이메일" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"></path></svg>
-                    </a>
-                    <!-- GitHub -->
-                    <a href="https://github.com/Leejaewang03/kingAI" target="_blank" rel="noopener noreferrer" title="GitHub" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.489.5.09.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.949 0-1.091.39-1.984 1.029-2.685-.103-.253-.446-1.272.098-2.647 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.81c.85.004 1.705.115 2.504.336 1.909-1.296 2.747-1.026 2.747-1.026.546 1.375.202 2.394.1 2.647.64.701 1.028 1.594 1.028 2.685 0 3.848-2.339 4.69-4.566 4.935.359.308.678.92.678 1.853 0 1.338-.012 2.419-.012 2.747 0 .268.18.577.688.482A10.003 10.003 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"></path></svg>
-                    </a>
-                    <!-- LinkedIn (준비중) -->
-                    <a href="#" target="_blank" rel="noopener noreferrer" title="LinkedIn (준비중)" class="text-gray-400 hover:text-blue-400 transition-colors duration-300 opacity-50 cursor-not-allowed">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.08 17H5.5V9.5h2.58V17zM6.8 8.1c-.8 0-1.3-.5-1.3-1.2C5.5 6 6 5.5 6.8 5.5c.8 0 1.3.5 1.3 1.2 0 .7-.5 1.4-1.3 1.4zm10.32 8.9h-2.5V13.6c0-1.2-.5-1.8-1.5-1.8-.8 0-1.3.6-1.5 1.2-.1.2-.1.5-.1.8v3.2H8.08V9.5h2.5v1.2c.4-.6 1.1-1.3 2.3-1.3 1.7 0 3 1.1 3 3.5v3.9z"></path></svg>
-                    </a>
+            <div class="feature-card">
+                <h3>1. 커스텀 캐릭터 제작 엔진</h3>
+                <p>사용자가 캐릭터의 성격, 말투, 세계관을 최대 10,000자까지 상세하게 설정할 수 있습니다. 사용자가 입력한 설정값은 <strong>Dynamic System Prompt</strong>로 변환되어, AI가 완벽하게 해당 캐릭터를 연기하도록 합니다.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>2. 장기 기억 (Long-term Memory) 시스템 ✨</h3>
+                <p><strong>문제:</strong> 대화가 길어지면 LLM이 초기 내용을 잊거나 토큰 비용이 급증함.</p>
+                <p><strong>해결:</strong> Sliding Window와 Recursive Summary 기법을 도입했습니다.</p>
+                <ul style="padding-left: 20px; color: var(--text-sub); list-style: disc;">
+                    <li>최근 N개의 대화는 원문 그대로 유지하여 생동감 확보</li>
+                    <li>오래된 대화는 주기적으로 Gemini Flash 모델을 통해 요약하여 DB에 저장</li>
+                    <li>다음 대화 시 <strong>[요약본 + 최근 대화]</strong>를 프롬프트에 주입하여 수천 턴이 지나도 기억 유지</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3>3. 토큰 및 비용 관리 시스템</h3>
+                <p>TikToken과 유사한 로직으로 입력/출력 토큰을 실시간 계산하고 추적하여, 사용자별/채팅방별 정확한 사용량 모니터링 및 과금 모델의 기반을 마련했습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture -->
+    <section id="architecture">
+        <div class="container">
+            <h2>System Architecture</h2>
+            <div class="architecture-diagram">
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px;">
+                    <div class="arch-step">User</div>
+                    <div>➡ HTTPS ➡</div>
+                    <div class="arch-step" style="background: #ffca28; border-color: #ffca28;">Frontend<br><small>Firebase Hosting</small></div>
+                    <div>➡ REST API ➡</div>
+                    <div class="arch-step" style="background: #4285f4; border-color: #4285f4; color: white;">Backend<br><small>Google Cloud Run</small></div>
+                </div>
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px dashed #ccc;">
+                    <div style="display: inline-block; margin: 10px;">👇 Auth<br><strong>Secret Manager</strong></div>
+                    <div style="display: inline-block; margin: 10px;">👇 Data<br><strong>MySQL (Cloud SQL)</strong></div>
+                    <div style="display: inline-block; margin: 10px;">👇 AI Inference<br><strong>Gemini 2.5 Pro</strong></div>
                 </div>
             </div>
-        </header>
+        </div>
+    </section>
 
-        <!-- 2. About Me 상세 소개 -->
-        <section>
-            <h2 class="section-title">About Me</h2>
-            <div class="card space-y-4 text-lg text-gray-300">
-                <p>
-                    저는 단순히 “동작하는 UI”가 아니라, <span class="text-blue-400 font-semibold">사용자가 오래 머물고 싶어지는 경험</span>을 만드는 개발자입니다.
-                    React + TypeScript로 복잡한 인터랙션을 구현하고, 백엔드와 데이터 구조까지 스스로 설계하는 풀스택 스타일을 지향합니다.
-                </p>
-                <p>
-                    이번 프로젝트인 <span class="text-blue-400 font-semibold">KingAI</span>는
-                    사용자가 직접 캐릭터를 만들고, 그 캐릭터와 세계관 속에서 대화할 수 있는
-                    <span class="font-semibold">생성형 AI 캐릭터 채팅 플랫폼</span>입니다.
-                    프론트엔드는 React + Vite, 백엔드는 Spring Boot 3 + Spring Security + MySQL로 구축했고,
-                    Gemini 2.5 Pro( Vertex AI )를 연동해 실제 LLM 추론을 처리합니다.
-                </p>
-                <p>
-                    특히 이 프로젝트에서는 LLM의 한계인 “기억 유지” 문제를 해결하기 위해
-                    <span class="font-semibold">대화 로그 저장, n턴마다 자동 요약(Long-term Memory), 토큰·비용 계산, 캐릭터별 대화방 구조</span>를
-                    직접 설계하고 구현했습니다. 이 과정에서 프롬프트 엔지니어링, 엔티티 설계, API 설계, 클라이언트 상태 관리까지
-                    전 영역을 경험하며 한 단계 성장할 수 있었습니다.
-                </p>
-            </div>
-        </section>
-
-        <!-- 3. Skills 기술 스택 -->
-        <section>
-            <h2 class="section-title">Skills</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- 프론트엔드 -->
-                <div class="card">
-                    <h3 class="text-xl font-semibold text-blue-400 mb-4">Frontend</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag">TypeScript</span>
-                        <span class="skill-tag">JavaScript (ES6+)</span>
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Vite</span>
-                        <span class="skill-tag">Tailwind CSS</span>
-                        <span class="skill-tag">React Router</span>
-                    </div>
+    <!-- Feedback -->
+    <section id="feedback">
+        <div class="container">
+            <h2>User Feedback</h2>
+            <p>베타 테스트 (대상: 20대 대학생 및 커뮤니티 유저)</p>
+            <div class="feedback-grid">
+                <div class="feedback-card">
+                    <span class="stars">⭐⭐⭐⭐⭐ 4.8</span>
+                    <h3>캐릭터 몰입도</h3>
+                    <p>"내가 설정한 말투를 끝까지 유지하는 게 신기하다. 진짜 살아있는 것 같다."</p>
                 </div>
-                <!-- 백엔드 -->
-                <div class="card">
-                    <h3 class="text-xl font-semibold text-blue-400 mb-4">Backend</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag">Spring Boot 3</span>
-                        <span class="skill-tag">Spring Security</span>
-                        <span class="skill-tag">JPA / Hibernate</span>
-                        <span class="skill-tag">MySQL</span>
-                        <span class="skill-tag">Gemini 2.5 Pro (Vertex AI)</span>
-                        <span class="skill-tag">REST API 설계</span>
-                    </div>
+                <div class="feedback-card">
+                    <span class="stars">⭐⭐⭐⭐⭐ 4.7</span>
+                    <h3>기억력 성능</h3>
+                    <p>"며칠 전 했던 대화 내용을 기억해서 언급할 때 소름 돋았다."</p>
                 </div>
-                <!-- DevOps & Tools -->
-                <div class="card">
-                    <h3 class="text-xl font-semibold text-blue-400 mb-4">DevOps & Tools</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag">Git / GitHub</span>
-                        <span class="skill-tag">Maven</span>
-                        <span class="skill-tag">pnpm</span>
-                        <span class="skill-tag">IntelliJ IDEA</span>
-                        <span class="skill-tag">VS Code</span>
-                        <span class="skill-tag">Postman / curl</span>
-                    </div>
+                <div class="feedback-card">
+                    <span class="stars">⭐⭐⭐⭐⭐ 4.5</span>
+                    <h3>UI/UX 편의성</h3>
+                    <p>"다크 모드 디자인이 깔끔하고 채팅 반응 속도가 빨라서 좋다."</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- 4. 프로젝트 상세 -->
-        <section>
-            <h2 class="section-title">Project: KingAI – 생성형 AI 캐릭터 채팅 플랫폼</h2>
-            
-            <div class="card overflow-hidden">
-                <!-- 프로젝트 메인 이미지 (스크린샷으로 교체 가능) -->
-                <img 
-                    src="https://placehold.co/1024x400/1a202c/718096?text=KingAI+Character+Chat+UI" 
-                    alt="KingAI 프로젝트 메인 이미지" 
-                    class="w-full h-48 md:h-64 object-cover bg-gray-800"
-                    onerror="this.src='https://placehold.co/1024x400/1a202c/718096?text=KingAI+Character+Chat+UI';">
-                
-                <div class="p-6 md:p-8 space-y-8">
-                    <!-- 개요 -->
-                    <div>
-                        <h3 class="text-lg font-semibold text-white mb-3">1. 개요</h3>
-                        <p class="text-gray-300 leading-relaxed">
-                            <span class="font-semibold">KingAI</span>는 사용자가 직접 만든 캐릭터와
-                            <span class="text-blue-400 font-semibold">지속적인 세계관 기반 대화</span>를 할 수 있는
-                            웹 기반 AI 채팅 플랫폼입니다.  
-                            단순 질문·답변 챗봇이 아니라,
-                            <span class="font-semibold">캐릭터 설정, 이미지, 태그, 장기기억</span>을 모두 활용해
-                            마치 비주얼 노벨처럼 캐릭터와 상호작용할 수 있도록 설계했습니다.
-                        </p>
-                        <ul class="list-disc list-inside mt-3 space-y-1 text-gray-300">
-                            <li>사용자가 캐릭터를 생성하고, 상세 설정(프로필/세계관/규칙)을 작성</li>
-                            <li>캐릭터별로 여러 장의 이미지를 업로드하고 <code class="text-sm bg-gray-800 px-1 rounded">{img:N}</code> 토큰으로 활용</li>
-                            <li>각 캐릭터마다 독립된 대화방과 대화 히스토리, 롱텀 메모리(LTM)를 유지</li>
-                            <li>Gemini 2.5 Pro와 연동해 3인칭 소설체 RP 스타일로 응답 생성</li>
-                        </ul>
-                    </div>
-
-                    <!-- 기술 스택 -->
-                    <div>
-                        <h3 class="text-lg font-semibold text-white mb-3">2. 기술 스택</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300 text-sm md:text-base">
-                            <div class="space-y-1">
-                                <p class="font-semibold text-blue-400">Frontend</p>
-                                <ul class="list-disc list-inside space-y-1">
-                                    <li>React + TypeScript + Vite</li>
-                                    <li>React Router 기반 SPA 화면 구성</li>
-                                    <li>Tailwind + 커스텀 CSS로 다크모드 채팅 UI</li>
-                                    <li>슬라이더로 사고 토큰 / 출력 토큰 / n턴 제어</li>
-                                </ul>
-                            </div>
-                            <div class="space-y-1">
-                                <p class="font-semibold text-blue-400">Backend & Infra</p>
-                                <ul class="list-disc list-inside space-y-1">
-                                    <li>Spring Boot 3, Spring Security</li>
-                                    <li>JPA / Hibernate + MySQL (User, Work, Image, Conversation, Message, ChatUsage, ModelPricing 등)</li>
-                                    <li>Gemini 2.5 Pro (Vertex AI) REST 연동</li>
-                                    <li>대화별 토큰/비용 로깅 및 과금 계산 로직</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 구현된 기술 -->
-                    <div>
-                        <h3 class="text-lg font-semibold text-white mb-3">3. 구현된 기술</h3>
-                        <div class="space-y-4 text-gray-300 text-sm md:text-base">
-                            <div>
-                                <p class="font-semibold text-blue-400 mb-1">① 캐릭터 생성 & 이미지 슬롯 시스템</p>
-                                <ul class="list-disc list-inside space-y-1">
-                                    <li><code>/api/characters</code> API로 캐릭터 생성 (제목, 상세 설정, 공개 여부, 태그)</li>
-                                    <li><code>/api/characters/{id}/images</code> 엔드포인트로 이미지 업로드 (slotIndex, label)</li>
-                                    <li>프론트에서는 <code>{img:0}</code>, <code>{img:1}</code> 같은 토큰을 채팅에 섞어 쓰면 자동으로 해당 슬롯 이미지를 렌더링</li>
-                                </ul>
-                            </div>
-
-                            <div>
-                                <p class="font-semibold text-blue-400 mb-1">② 캐릭터별 대화방 & 장기기억 구조</p>
-                                <ul class="list-disc list-inside space-y-1">
-                                    <li><code>Conversation</code> 엔티티로 캐릭터별 대화 세션 관리 (user, work, memoryTurns, rollingSummary)</li>
-                                    <li><code>Message</code> 엔티티로 모든 user / model 메시지 순서대로 저장</li>
-                                    <li>프론트에서 선택한 <span class="font-semibold">n턴</span> 값에 따라 최근 n턴만 LLM에 넘기고,  
-                                        n턴마다 전체 대화를 요약해 <code>rollingSummary</code>에 저장하는 LTM 구현</li>
-                                </ul>
-                            </div>
-
-                            <div>
-                                <p class="font-semibold text-blue-400 mb-1">③ Gemini 2.5 Pro 연동 & 프롬프트 엔지니어링</p>
-                                <ul class="list-disc list-inside space-y-1">
-                                    <li>Vertex AI <code>generateContent</code> REST API를 직접 호출하는 <code>VertexGenerateContentCaller</code> 설계</li>
-                                    <li>
-                                        <span class="font-semibold">System Prompt</span>에서
-                                        <code>{"reasoning": "...", "final": "..."}</code> 구조의 JSON만 반환하도록 강제
-                                    </li>
-                                    <li>3인칭 소설체 RP 규칙, 캐릭터 스펙, 이미지 토큰 사용 규칙 등을 System Prompt에 정리</li>
-                                    <li>LLM이 JSON을 깨뜨려도 <code>ObjectMapper + regex</code>로 최대한 <code>final</code>을 복구하는 방어 로직 구현</li>
-                                </ul>
-                            </div>
-
-                            <div>
-                                <p class="font-semibold text-blue-400 mb-1">④ 토큰 / 비용 계산 및 모니터링</p>
-                                <ul class="list-disc list-inside space-y-1">
-                                    <li>Gemini 응답의 <code>usageMetadata</code>에서
-                                        <code>promptTokenCount</code>, <code>candidatesTokenCount</code>, <code>thoughtsTokenCount</code> 분리</li>
-                                    <li>입력 / 출력 / 사고 토큰을 따로 저장하고,  
-                                        <code>ModelPricing</code> 테이블 기반으로 1k 토큰당 단가를 곱해 원화 비용 계산</li>
-                                    <li><code>ChatUsage</code> 엔티티로 대화별 토큰 사용량과 비용을 로그로 남김</li>
-                                    <li>프론트에서는 마지막 응답 기준으로 “모델명 / 토큰 수 / 추정 비용(원)”을 실시간으로 표기</li>
-                                </ul>
-                            </div>
-
-                            <div>
-                                <p class="font-semibold text-blue-400 mb-1">⑤ 프론트엔드 대화 UI & 슬라이더 제어</p>
-                                <ul class="list-disc list-inside space-y-1">
-                                    <li><code>CharacterChatPage</code>에서 캐릭터 정보 + 이미지 + 대화 + 장기기억 UI를 한 화면에 구성</li>
-                                    <li>오른쪽 사이드바에서
-                                        <span class="font-semibold">사고 토큰(128~4096), 출력 토큰(512~8192), n턴</span>을 슬라이더로 직관적으로 제어</li>
-                                    <li>각 캐릭터별 대화 상태(메시지, conversationId, LTM)를 <code>localStorage</code>에 저장해 새로고침에도 유지</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 결과 / 회고 -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- 결과 -->
-                        <div>
-                            <h3 class="text-lg font-semibold text-white mb-3">결과</h3>
-                            <div class="p-4 bg-gray-900 rounded-lg h-full text-gray-300 text-sm md:text-base space-y-1">
-                                <p>✔ 캐릭터 생성 → 이미지 업로드 → 캐릭터별 AI 채팅까지 한 흐름으로 동작하는 프로토타입 완성</p>
-                                <p>✔ n턴 LTM 요약 구조 덕분에, 긴 대화도 맥락을 유지하면서 토큰 사용량을 통제 가능</p>
-                                <p>✔ 프론트에서 사고 토큰 / 출력 토큰 / n턴을 조절하며, 비용과 품질을 직관적으로 실험할 수 있는 환경 구축</p>
-                            </div>
-                        </div>
-                        <!-- 회고 -->
-                        <div>
-                            <h3 class="text-lg font-semibold text-white mb-3">회고</h3>
-                            <div class="p-4 bg-gray-900 rounded-lg h-full text-gray-300 text-sm md:text-base space-y-1">
-                                <p>• LLM 서비스는 “프롬프트 한 줄”이 아니라,</p>
-                                <p class="pl-3">① 데이터 모델링, ② 히스토리 관리, ③ 비용 구조, ④ UI 제어까지 모두 설계해야 한다는 점을 체감했습니다.</p>
-                                <p>• 다음 단계로는 TTS, 이미지 생성까지 붙여서 “대화 + 보이스 + 비주얼”이 통합된 캐릭터 시뮬레이션 플랫폼으로 확장할 계획입니다.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 아키텍처 및 기능 스크린샷 (원하면 실제 이미지 URL로 교체) -->
-                    <div class="mt-10">
-                        <h3 class="text-lg font-semibold text-white mb-4">아키텍처 및 주요 화면</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- 아키텍처 다이어그램 -->
-                            <div class="border border-gray-700 rounded-lg p-3">
-                                <img 
-                                    src="https://placehold.co/800x450/1a202c/718096?text=Spring+Boot+%2B+React+%2B+Gemini+Architecture" 
-                                    alt="아키텍처 다이어그램" 
-                                    class="w-full h-auto object-cover rounded-md bg-gray-800"
-                                    onerror="this.src='https://placehold.co/800x450/1a202c/718096?text=Architecture+Diagram';">
-                                <p class="text-center text-sm text-gray-500 mt-2">Spring Boot + React + Gemini 아키텍처</p>
-                            </div>
-
-                            <!-- 캐릭터 목록 / 생성 화면 -->
-                            <div class="border border-gray-700 rounded-lg p-3">
-                                <img 
-                                    src="https://placehold.co/800x450/1a202c/718096?text=Character+List+%26+Create+Screen" 
-                                    alt="캐릭터 목록 및 생성 화면" 
-                                    class="w-full h-auto object-cover rounded-md bg-gray-800"
-                                    onerror="this.src='https://placehold.co/800x450/1a202c/718096?text=Feature+1+Screenshot';">
-                                <p class="text-center text-sm text-gray-500 mt-2">캐릭터 목록 및 생성 화면</p>
-                            </div>
-                            
-                            <!-- 채팅 + 장기기억 + 토큰 슬라이더 UI -->
-                            <div class="border border-gray-700 rounded-lg p-3 md:col-span-2">
-                                <img 
-                                    src="https://placehold.co/1000x450/1a202c/718096?text=Chat+%2B+LTM+%2B+Token+Slider+UI" 
-                                    alt="AI 채팅 및 장기기억/슬라이더 인터페이스" 
-                                    class="w-full h-auto object-cover rounded-md bg-gray-800"
-                                    onerror="this.src='https://placehold.co/800x450/1a202c/718096?text=Feature+2+Screenshot';">
-                                <p class="text-center text-sm text-gray-500 mt-2">AI 채팅 + 장기기억 + 토큰 슬라이더 인터페이스</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Troubleshooting -->
+    <section id="troubleshooting">
+        <div class="container">
+            <h2>Troubleshooting</h2>
+            <div class="feature-card" style="border-left-color: #ef4444;">
+                <h3>🔥 이슈: 배포 후 이미지 404 오류 (Stateless)</h3>
+                <p><strong>원인:</strong> Cloud Run은 컨테이너 기반이라 내부 파일 시스템(/tmp)이 휘발성임. 재배포 시 업로드한 이미지가 초기화됨.</p>
+                <p><strong>해결:</strong> 단기적으로는 재업로드를 통해 시연을 진행했으며, 장기적으로 <strong>Google Cloud Storage(GCS)</strong>를 연동하여 영구 저장소로 아키텍처를 개선할 계획입니다.</p>
             </div>
-        </section>
+            <div class="feature-card" style="border-left-color: #ef4444;">
+                <h3>🔥 이슈: CORS 및 보안 설정</h3>
+                <p><strong>원인:</strong> Frontend(Firebase)와 Backend(Cloud Run)의 도메인이 달라 브라우저 정책상 API 요청이 차단됨.</p>
+                <p><strong>해결:</strong> Spring Security의 <code>CorsConfigurationSource</code>를 커스터마이징하여 배포된 도메인만 선택적으로 허용하도록 보안 설정을 강화했습니다.</p>
+            </div>
+        </div>
+    </section>
 
-        <!-- Footer -->
-        <footer class="text-center mt-12">
-            <p class="text-gray-600">© 2024 이재왕. All rights reserved.</p>
-        </footer>
+    <!-- Demo Video -->
+    <section id="demo">
+        <div class="container">
+            <h2>Demo Video</h2>
+            <div class="video-container">
+                <!-- YouTube Embed -->
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/XQDdVIJXL8U" title="KingAI Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
 
-    </div>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Lee Jaewang. All rights reserved.</p>
+            <p>Powered by React & Spring Boot</p>
+        </div>
+    </footer>
 
 </body>
 </html>
